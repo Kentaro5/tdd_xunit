@@ -9,7 +9,7 @@ class WasRun extends TestCase
 
     public function __construct(String $name)
     {
-        $this->wasRun = 0;
+        $this->wasRun = 'None';
         parent::__construct($name);
 
     }

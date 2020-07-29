@@ -10,7 +10,7 @@ class TestCaseTest extends TestCase
     public function testRunning()
     {
         $test = new WasRun("testMethod");
-        assert(0 === $test->wasRun);
+        assert('None' === $test->wasRun);
         $test->run();
         assert(1 === $test->wasRun);
     }
