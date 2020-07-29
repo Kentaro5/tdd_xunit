@@ -2,21 +2,16 @@
 
 namespace App\xUnit;
 
-class WasRun
+
+class WasRun extends TestCase
 {
     public $wasRun;
-    private $name;
 
     public function __construct(String $name)
     {
         $this->wasRun = 0;
-        $this->name = $name;
-    }
+        parent::__construct($name);
 
-    public function run()
-    {
-        $method = $this->name;
-        $this->$method();
     }
 
     public function testMethod()
