@@ -15,7 +15,8 @@ class WasRun
 
     public function run()
     {
-        $this->testMethod();
+        $method = $this->name;
+        $this->$method();
     }
 
     public function testMethod()
