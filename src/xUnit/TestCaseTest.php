@@ -9,12 +9,19 @@ class TestCaseTest extends TestCase
 
     public function testRunning()
     {
-        $test = new WasRun("testMethod");
-        assert('None' === $test->wasRun);
-        $test->run();
-        assert(1 === $test->wasRun);
+
+        $this->test->run();
+        assert(1 === $this->test->wasRun);
+    }
+
+    public function testSetup()
+    {
+        $this->test->run();
+        assert( 1 === $this->test->wasSetUp );
     }
 }
 
 $testCasetTest = new TestCaseTest('testRunning');
 $testCasetTest->run();
+$testCasetTestSetUp = new TestCaseTest('testSetUp');
+$testCasetTestSetUp->run();
