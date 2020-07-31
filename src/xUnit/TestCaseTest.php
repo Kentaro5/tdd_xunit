@@ -5,7 +5,11 @@ require 'vendor/autoload.php';
 
 class TestCaseTest extends TestCase
 {
-
+    private $test;
+    public function setUp()
+    {
+        $this->test = new WasRun("testMethod");
+    }
 
     public function testRunning()
     {
