@@ -11,8 +11,14 @@ class TestCase
         $this->name = $name;
     }
 
+    public function setUp()
+    {
+
+    }
+
     public function run()
     {
+        $this->setUp();
         $method = $this->name;
         $this->$method();
     }
