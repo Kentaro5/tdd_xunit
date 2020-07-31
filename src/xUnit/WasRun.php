@@ -5,17 +5,20 @@ namespace App\xUnit;
 
 class WasRun extends TestCase
 {
-    public $wasRun;
-    public $wasSetUp;
+    public $log;
 
     public function testMethod()
     {
-        $this->wasRun = 1;
+        $this->log = $this->log.' testMethod';
     }
 
     public function setUp()
     {
-        $this->wasRun = 'None';
-        $this->wasSetUp = 1;
+        $this->log = 'setUp';
+    }
+
+    public function tearDown()
+    {
+        $this->log = $this->log.' tearDown';
     }
 }

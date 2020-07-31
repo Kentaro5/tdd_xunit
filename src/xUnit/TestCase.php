@@ -16,11 +16,17 @@ class TestCase
 
     }
 
+    public function tearDown()
+    {
+
+    }
+
     public function run()
     {
         $this->setUp();
         $method = $this->name;
         $this->$method();
+        $this->tearDown();
     }
 
 }
