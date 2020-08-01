@@ -21,6 +21,14 @@ class TestCaseTest extends TestCase
         assert('1 run, 0 failed' === $result->summary());
     }
 
+    public function testFailedResultFormatting()
+    {
+        $result = new TestResult();
+        $result->testStarted();
+        $result->testFailed();
+        assert('1 run, 1 failed' === $result->summary());
+        print($result->summary())."\n";
+    }
 }
 
 $testTemplateMethod = new TestCaseTest('testTemplateMethod');
