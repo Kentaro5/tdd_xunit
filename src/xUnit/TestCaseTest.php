@@ -5,40 +5,45 @@ require 'vendor/autoload.php';
 
 class TestCaseTest extends TestCase
 {
-    private $test;
+    protected $result;
+
+    public function setUp()
+    {
+        $this->result = new TestResult();
+    }
 
     public function testTemplateMethod()
     {
         $test = new WasRun("testMethod");
-        $result = $test->run();
+
+        $test->run($this->result);
         assert( 'setUp testMethod tearDown' === $test->log );
-        print($result->summary())."\n";
+        print($this->result->summary())."\n";
     }
 
     public function testResult()
     {
         $test = new WasRun('testMethod');
-        $result = $test->run();
-        assert('1 run, 0 failed' === $result->summary());
-        print($result->summary())."\n";
+        $test->run($this->result);
+        assert('1 run, 0 failed' === $this->result->summary());
+        print($this->result->summary())."\n";
     }
 
     public function testFailedResult()
     {
         $test = new WasRun('testBrokenMethod');
-        $result = $test->run();
-        assert('1 run, 1 failed' === $result->summary());
-        print($result->summary())."\n";
+        $test->run($this->result);
+        assert('1 run, 1 failed' === $this->result->summary());
+        print($this->result->summary())."\n";
 
     }
 
     public function testFailedResultFormatting()
     {
-        $result = new TestResult();
-        $result->testStarted();
-        $result->testFailed();
-        assert('1 run, 1 failed' === $result->summary());
-        print($result->summary())."\n";
+        $this->result->testStarted();
+        $this->result->testFailed();
+        assert('1 run, 1 failed' === $this->result->summary());
+        print($this->result->summary())."\n";
     }
 
     public function testSuite()
@@ -52,14 +57,12 @@ class TestCaseTest extends TestCase
     }
 }
 
-$testTemplateMethod = new TestCaseTest('testTemplateMethod');
-$testTemplateMethod->run();
+$suite = new TestSuite();
+$suite->add(new TestCaseTest('testTemplateMethod'));
+$suite->add(new TestCaseTest('testResult'));
+$suite->add(new TestCaseTest('testFailedResult'));
+$suite->add(new TestCaseTest('testFailedResultFormatting'));
+$suite->add(new TestCaseTest('testSuite'));
 
-$testTestResult = new TestCaseTest('testResult');
-$testTestResult->run();
-
-$testTestFailedResult = new TestCaseTest('testFailedResult');
-$testTestFailedResult->run();
-
-$testFailedResultFormatting = new TestCaseTest('testFailedResultFormatting');
-$testFailedResultFormatting->run();
+$result = new TestResult();
+$suite->run($result);
