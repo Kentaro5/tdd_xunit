@@ -40,6 +40,16 @@ class TestCaseTest extends TestCase
         assert('1 run, 1 failed' === $result->summary());
         print($result->summary())."\n";
     }
+
+    public function testSuite()
+    {
+        $suite = new TestSuite();
+        $suite->add(new WasRun('testMethod'));
+        $suite->add(new WasRun('testBrokenMethod'));
+        $suite->run($this->result);
+        assert('2 run, 1 failed' === $this->result->summary());
+        print($this->result->summary())."\n";
+    }
 }
 
 $testTemplateMethod = new TestCaseTest('testTemplateMethod');
