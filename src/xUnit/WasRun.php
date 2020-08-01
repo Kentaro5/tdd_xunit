@@ -24,6 +24,6 @@ class WasRun extends TestCase
 
     public function testBrokenMethod()
     {
-        throw new Exception();
+        throw new \Exception();
     }
 }
