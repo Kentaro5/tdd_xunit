@@ -21,4 +21,9 @@ class WasRun extends TestCase
     {
         $this->log = $this->log.' tearDown';
     }
+
+    public function testBrokenMethod()
+    {
+        throw new Exception();
+    }
 }
